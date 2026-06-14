@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🚀 AI Portfolio Review Analyzer</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#0f172a;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+margin:0;
+padding:20px;
+}
+
+.container{
+width:800px;
+max-width:100%;
+background:#1e293b;
+padding:25px;
+border-radius:15px;
+box-shadow:0 0 15px rgba(0,0,0,0.3);
+}
+
+h2{
+text-align:center;
+color:#38bdf8;
+}
+
+textarea{
+width:100%;
+height:220px;
+padding:12px;
+border-radius:8px;
+resize:none;
+font-size:14px;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:15px;
+background:#38bdf8;
+border:none;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+font-size:16px;
+}
+
+.result{
+margin-top:20px;
+background:#0f172a;
+padding:15px;
+border-radius:10px;
+}
+
+.progress{
+height:20px;
+background:#334155;
+border-radius:10px;
+overflow:hidden;
+margin-top:10px;
+}
+
+.bar{
+height:100%;
+background:#22c55e;
+}
+
+ul{
+padding-left:20px;
+}
+
+.score{
+font-size:24px;
+font-weight:bold;
+color:#22c55e;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>🚀 AI Portfolio Review Analyzer</h2>
+
+<textarea id="portfolio"
+placeholder="Paste your portfolio details here...
+
+Example:
+
+Skills: Python, SQL, Pandas, Machine Learning
+
+Projects:
+Resume Analyzer
+Chatbot
+Portfolio Website
+
+GitHub: github.com/username
+
+Internship: Data Science Intern
+
+Certifications:
+IBM Data Science
+Google Data Analytics
+"></textarea>
+
+<button onclick="analyzePortfolio()">
+Analyze Portfolio
+</button>
+
+<button onclick="resetForm()">
+Reset
+</button>
+
+<div id="result" class="result"></div>
+
+</div>
+
+<script>
+
+function analyzePortfolio(){
+
+let text=document.getElementById("portfolio").value.toLowerCase();
+
+if(text.trim()===""){
+document.getElementById("result").innerHTML=
+"<h3>Please paste portfolio details.</h3>";
+return;
+}
+
+let score=0;
+
+let strengths=[];
+let weaknesses=[];
+let recommendations=[];
+
+if(text.includes("python")){
+score+=15;
+strengths.push("Python Skill Present");
+}else{
+weaknesses.push("Python Skill Missing");
+recommendations.push("Learn Python");
+}
+
+if(text.includes("sql")){
+score+=10;
+strengths.push("SQL Skill Present");
+}else{
+weaknesses.push("SQL Missing");
+recommendations.push("Learn SQL");
+}
+
+if(text.includes("machine learning")){
+score+=15;
+strengths.push("Machine Learning Knowledge");
+}else{
+weaknesses.push("Machine Learning Missing");
+recommendations.push("Learn Machine Learning");
+}
+
+if(text.includes("project")){
+score+=15;
+strengths.push("Projects Added");
+}else{
+weaknesses.push("Projects Missing");
+recommendations.push("Build Projects");
+}
+
+if(text.includes("github")){
+score+=10;
+strengths.push("GitHub Presence");
+}else{
+weaknesses.push("GitHub Missing");
+recommendations.push("Create GitHub Portfolio");
+}
+
+if(text.includes("internship")){
+score+=15;
+strengths.push("Internship Experience");
+}else{
+weaknesses.push("No Internship");
+recommendations.push("Apply for Internships");
+}
+
+if(text.includes("certification")){
+score+=10;
+strengths.push("Certifications Added");
+}else{
+weaknesses.push("Certifications Missing");
+recommendations.push("Complete Certifications");
+}
+
+if(text.includes("portfolio")){
+score+=10;
+strengths.push("Portfolio Mentioned");
+}else{
+recommendations.push("Create Portfolio Website");
+}
+
+if(score>100){
+score=100;
+}
+
+let impression="Needs Improvement";
+
+if(score>=80){
+impression="Excellent";
+}
+else if(score>=60){
+impression="Very Good";
+}
+else if(score>=40){
+impression="Good";
+}
+
+document.getElementById("result").innerHTML=`
+
+<div class="score">
+Portfolio Score: ${score}/100
+</div>
+
+<div class="progress">
+<div class="bar" style="width:${score}%"></div>
+</div>
+
+<h3>✅ Strengths</h3>
+<ul>
+${strengths.map(x=>`<li>${x}</li>`).join("")}
+</ul>
+
+<h3>❌ Areas to Improve</h3>
+<ul>
+${weaknesses.map(x=>`<li>${x}</li>`).join("")}
+</ul>
+
+<h3>🚀 Recommendations</h3>
+<ul>
+${recommendations.map(x=>`<li>${x}</li>`).join("")}
+</ul>
+
+<h3>👨‍💼 Recruiter Impression</h3>
+<p><b>${impression}</b></p>
+
+`;
+
+}
+
+function resetForm(){
+document.getElementById("portfolio").value="";
+document.getElementById("result").innerHTML="";
+}
+
+</script>
+
+</body>
+</html>
