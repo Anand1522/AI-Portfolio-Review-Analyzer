@@ -50,8 +50,7 @@ https://ai-portfolio-review-analyzer.netlify.app/
 - HTML
 - CSS
 - JavaScript
-- AI-Assisted Development
-
+- Built with the help of AI-assisted development tools
 ---
 
 ## 📋 How It Works
